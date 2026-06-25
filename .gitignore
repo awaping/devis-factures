@@ -1,0 +1,7 @@
+# Système
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Sauvegardes de données exportées depuis l'appli (ne pas publier)
+sauvegarde-factures-*.json

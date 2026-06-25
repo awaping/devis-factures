@@ -1,0 +1,20 @@
+{
+  "name": "Mes Devis & Factures",
+  "short_name": "Factures",
+  "description": "Création de devis et factures pour auto-entrepreneur, 100% sur la tablette.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0e3a5f",
+  "theme_color": "#0e3a5f",
+  "lang": "fr-FR",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

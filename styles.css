@@ -1,0 +1,333 @@
+/* ============================================================
+   Mes Devis & Factures — feuille de style
+   Pensée pour une tablette + utilisateur senior :
+   grande police, gros boutons, fort contraste, cibles tactiles >= 56px
+   ============================================================ */
+
+:root {
+  --bleu: #0e3a5f;
+  --bleu-clair: #1769a8;
+  --vert: #1c9c5b;
+  --vert-fonce: #157a47;
+  --rouge: #c0392b;
+  --gris-fond: #eef2f5;
+  --gris-bord: #cdd7df;
+  --gris-texte: #5b6b78;
+  --blanc: #ffffff;
+  --ombre: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --radius: 14px;
+  --tap: 58px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--gris-fond);
+  color: #1b2730;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 19px;
+  line-height: 1.4;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ---- Mise en page générale ---- */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+header.topbar {
+  background: var(--bleu);
+  color: var(--blanc);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: var(--ombre);
+}
+header.topbar .title {
+  font-size: 22px;
+  font-weight: 700;
+  flex: 1;
+}
+header.topbar .back {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: var(--blanc);
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 8px 14px;
+  min-height: 46px;
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+  padding: 18px;
+  padding-bottom: 110px; /* place pour la barre du bas */
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ---- Barre de navigation du bas ---- */
+nav.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--blanc);
+  border-top: 1px solid var(--gris-bord);
+  display: flex;
+  justify-content: space-around;
+  z-index: 30;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+}
+nav.tabbar button {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px 4px 12px;
+  font-size: 14px;
+  color: var(--gris-texte);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-height: 64px;
+}
+nav.tabbar button .ico { font-size: 26px; line-height: 1; }
+nav.tabbar button.active { color: var(--bleu); font-weight: 700; }
+
+/* ---- Boutons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: var(--tap);
+  padding: 0 22px;
+  font-size: 19px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  background: var(--blanc);
+  color: var(--bleu);
+  border-color: var(--gris-bord);
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--bleu); color: var(--blanc); border-color: var(--bleu); }
+.btn-vert { background: var(--vert); color: var(--blanc); border-color: var(--vert); }
+.btn-danger { background: var(--blanc); color: var(--rouge); border-color: var(--rouge); }
+.btn-bloc { width: 100%; }
+.btn-lg { min-height: 72px; font-size: 22px; }
+.btn .ico { font-size: 24px; }
+
+/* ---- Grandes tuiles de l'accueil ---- */
+.tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+.tile {
+  background: var(--bleu);
+  color: var(--blanc);
+  border: none;
+  border-radius: 18px;
+  padding: 28px 18px;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--ombre);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 140px;
+  justify-content: center;
+}
+.tile.vert { background: var(--vert); }
+.tile .ico { font-size: 46px; }
+
+/* ---- Sections / titres ---- */
+h2.section {
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gris-texte);
+  margin: 24px 0 12px;
+}
+
+/* ---- Cartes / listes ---- */
+.card {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  box-shadow: var(--ombre);
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.list-item {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  box-shadow: var(--ombre);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  min-height: var(--tap);
+}
+.list-item .grow { flex: 1; min-width: 0; }
+.list-item .li-titre { font-weight: 700; font-size: 19px; }
+.list-item .li-sous { color: var(--gris-texte); font-size: 16px; }
+.list-item .li-montant { font-weight: 700; font-size: 19px; white-space: nowrap; }
+
+.badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.badge-devis { background: #e7f0fa; color: var(--bleu-clair); }
+.badge-facture { background: #e7f6ee; color: var(--vert-fonce); }
+.badge-paye { background: var(--vert); color: #fff; }
+.badge-attente { background: #fdecd0; color: #9a6a12; }
+
+/* ---- Formulaires ---- */
+label.field { display: block; margin-bottom: 16px; }
+label.field .lab {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gris-texte);
+  margin-bottom: 6px;
+}
+input, textarea, select {
+  width: 100%;
+  font-size: 19px;
+  padding: 14px;
+  border: 2px solid var(--gris-bord);
+  border-radius: 12px;
+  background: var(--blanc);
+  font-family: inherit;
+  min-height: var(--tap);
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--bleu-clair);
+}
+textarea { min-height: 90px; resize: vertical; }
+.row2 { display: flex; gap: 14px; }
+.row2 > * { flex: 1; }
+
+/* ---- Lignes de prestation (éditeur) ---- */
+.ligne {
+  background: var(--blanc);
+  border: 2px solid var(--gris-bord);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.ligne .ligne-bas {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+.ligne .ligne-bas > div { flex: 1; }
+.ligne .ligne-total {
+  text-align: right;
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 8px;
+}
+.ligne .suppr {
+  background: none;
+  border: none;
+  color: var(--rouge);
+  font-size: 26px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* ---- Totaux ---- */
+.totaux {
+  text-align: right;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--bleu);
+  margin: 18px 0;
+}
+
+/* ---- Barre d'actions collante en bas de l'éditeur ---- */
+.actions-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.actions-bar .btn { flex: 1; min-width: 140px; }
+
+/* ---- Divers ---- */
+.vide {
+  text-align: center;
+  color: var(--gris-texte);
+  padding: 40px 20px;
+  font-size: 18px;
+}
+.vide .ico { font-size: 54px; display: block; margin-bottom: 10px; opacity: 0.5; }
+
+.search {
+  margin-bottom: 16px;
+}
+
+.note-legale {
+  font-size: 15px;
+  color: var(--gris-texte);
+  background: #f6f9fb;
+  border-left: 4px solid var(--bleu-clair);
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin: 14px 0;
+}
+
+.toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1b2730;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 30px;
+  font-size: 17px;
+  box-shadow: var(--ombre);
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+  max-width: 90%;
+  text-align: center;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+
+.hint { font-size: 15px; color: var(--gris-texte); margin-top: -8px; margin-bottom: 14px; }
+
+/* tablette large : 2 colonnes pour réglages */
+@media (min-width: 720px) {
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+}
