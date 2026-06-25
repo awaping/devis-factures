@@ -632,6 +632,7 @@ function renderReglages() {
 
     <h2 class="section">Sauvegarde des données</h2>
     <div class="note-legale">Vos données sont stockées <strong>uniquement sur cette tablette</strong>. Exportez régulièrement une sauvegarde (ex : une fois par mois) pour ne rien perdre.</div>
+    <div id="stockage-info" class="hint">Vérification du stockage…</div>
     <div class="actions-bar">
       <button class="btn btn-vert" id="s-export">⬇️ Exporter une sauvegarde</button>
       <label class="btn" style="cursor:pointer">⬆️ Restaurer<input id="s-import" type="file" accept="application/json,.json" hidden></label>
@@ -664,6 +665,32 @@ function renderReglages() {
 
   screenEl.querySelector('#s-export').addEventListener('click', exporterSauvegarde);
   screenEl.querySelector('#s-import').addEventListener('change', importerSauvegarde);
+
+  // État du stockage (persistant ou non + espace utilisé)
+  majInfoStockage();
+}
+
+async function majInfoStockage() {
+  const el = screenEl.querySelector('#stockage-info');
+  if (!el) return;
+  const nbDocs = docs.length, nbCli = clients.length;
+  let persist = null, utilise = '';
+  try {
+    if (navigator.storage) {
+      if (navigator.storage.persisted) persist = await navigator.storage.persisted();
+      if (!persist && navigator.storage.persist) persist = await navigator.storage.persist();
+      if (navigator.storage.estimate) {
+        const est = await navigator.storage.estimate();
+        if (est && est.usage != null) utilise = ` · ${Math.max(1, Math.round(est.usage / 1024))} Ko utilisés`;
+      }
+    }
+  } catch (e) {}
+  const etat = persist === true
+    ? '🔒 Stockage <strong>persistant</strong> (le navigateur s’engage à ne pas effacer)'
+    : persist === false
+      ? '⚠️ Stockage <strong>non garanti</strong> par le navigateur — sauvegardez régulièrement'
+      : 'Stockage local';
+  el.innerHTML = `${etat}.<br>${nbDocs} document(s), ${nbCli} client(s) enregistré(s) sur cette tablette${utilise}.`;
 }
 
 function exporterSauvegarde() {
@@ -869,6 +896,12 @@ async function envoyerDoc(d) {
 /* ----------------------------------------------------------------
    11) DÉMARRAGE
    ---------------------------------------------------------------- */
+// Demande au navigateur de conserver durablement les données (anti-éviction
+// quand la tablette manque d'espace). Sans effet néfaste si refusé.
+if (navigator.storage && navigator.storage.persist) {
+  navigator.storage.persisted().then(deja => { if (!deja) navigator.storage.persist(); }).catch(() => {});
+}
+
 go('accueil');
 
 if ('serviceWorker' in navigator) {
