@@ -1,5 +1,5 @@
 /* Service worker — cache des fichiers pour fonctionner 100% hors-ligne */
-const CACHE = 'devis-factures-v2';
+const CACHE = 'devis-factures-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const ASSETS = [
   './app.js',
   './manifest.webmanifest',
   './icon.svg',
+  './assets/logo-rosalie-transparent.png',
   './vendor/jspdf.umd.min.js',
   './vendor/jspdf.plugin.autotable.min.js'
 ];

@@ -852,6 +852,20 @@ function construirePdf(d) {
   const fLines = doc.splitTextToSize(footer, W - 2 * M);
   doc.text(fLines, M, pageH - 12);
 
+  // Filigrane Rosalie Beach centré sur chaque page du PDF.
+  const watermark = document.getElementById('pdf-watermark-logo');
+  if (watermark?.complete && watermark.naturalWidth) {
+    const size = 105;
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let page = 1; page <= pageCount; page++) {
+      doc.setPage(page);
+      doc.saveGraphicsState();
+      doc.setGState(new doc.GState({ opacity: 0.08 }));
+      doc.addImage(watermark, 'PNG', (W - size) / 2, (pageH - size) / 2, size, size);
+      doc.restoreGraphicsState();
+    }
+  }
+
   return doc;
 }
 
